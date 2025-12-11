@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using Microsoft.Data.SqlClient;
+using System.Diagnostics;
 
 namespace FINALPROJECT_inventory_
 {
@@ -59,6 +60,89 @@ namespace FINALPROJECT_inventory_
             }
             return false;
 
+        }
+
+        //Create Products
+        public void insertProduct(string name, string desc, string category, double price)
+        {
+            currConnection = new SqlConnection(connectionString);
+
+            currConnection.Open();
+
+            sqlStatement = "INSERT INTO Products (Name, Description, Category, Price) VALUES (@Name, @Description, @Category, @Price)";
+
+            SqlCommand myQuery = new SqlCommand(sqlStatement, currConnection);
+
+            myQuery.Parameters.AddWithValue("@Name", name);
+            myQuery.Parameters.AddWithValue("@Description", desc);
+            myQuery.Parameters.AddWithValue("@Category", category);
+            myQuery.Parameters.AddWithValue("@Price", price);
+
+            myQuery.ExecuteNonQuery();
+
+            currConnection.Close();
+        }
+
+
+
+
+        //Create Locations
+        public void insertLocation()
+        {
+
+        }
+
+        //Create Stock(?)
+        public void insertStock()
+        {
+
+        }
+
+
+
+        //Read For All Tables
+        public void readTable(string table)
+        {
+            currConnection = new SqlConnection(connectionString);
+
+            currConnection.Open();
+
+            sqlStatement = "SELECT * FROM @Table";
+
+            SqlCommand myQuery = new SqlCommand(sqlStatement, currConnection);
+
+            myQuery.Parameters.AddWithValue("@Table", table);
+            myQuery.ExecuteNonQuery();
+
+            currConnection.Close();
+        }
+
+
+        //Delete For All Tables
+        public void deleteData(string table, string field, string condition)
+        {
+            currConnection = new SqlConnection(connectionString);
+
+            currConnection.Open();
+
+            sqlStatement = "DELETE FROM @Table WHERE @Field = @Condition";
+
+            SqlCommand myQuery = new SqlCommand(sqlStatement, currConnection);
+
+            myQuery.Parameters.AddWithValue("@Table", table);
+            myQuery.Parameters.AddWithValue("@Field", field);
+            myQuery.Parameters.AddWithValue("@Condition", condition);
+            myQuery.ExecuteNonQuery();
+
+            currConnection.Close();
+        }
+
+
+        //Update For (?) -- NEEDS FINISHED
+        public void update()
+        {
+            currConnection = new SqlConnection(connectionString);
+            currConnection.Open();
         }
     }
 }
