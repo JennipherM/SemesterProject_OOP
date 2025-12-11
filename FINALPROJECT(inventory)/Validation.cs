@@ -10,13 +10,13 @@ namespace FINALPROJECT_inventory_
 {
     internal class Validation
     {
-        string name; //can be product or location name
-        string description;
-        string category;
-        double price;
-        string address;
-        string type;
-        int quantity;
+        string name =""; //can be product or location name
+        string description= "";
+        string category = "";
+        double price = 0.0;
+        string address = "";
+        string type = "";
+        int quantity = 0;
 
         int constructorUsed;
 
